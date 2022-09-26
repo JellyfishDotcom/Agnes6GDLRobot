@@ -3,7 +3,7 @@ Un robot manipulador antropomórfico con muñeca esférica (6 GDL), simulado, pr
 
 ## Ficheros
 En la carpeta "AgnesCAD" se encuentran los sólidos generados en Solid Works v2022 (licencia estudiantil).
-En la carpeta Agnes se contiene un fichero python "visualize_agnes.py" que al correrlo abre el simulador Pybullet con el contenido del URDF. Además de contener
+En la carpeta "Agnes" se contiene un fichero python "visualize_agnes.py" que al correrlo abre el simulador Pybullet con el contenido del URDF. Además de contener
   una carpeta llamada "URDF", donde se tienen todos los .STL de los eslabones del robot y el fichero "agnes.urdf.xml" que funge como URDF de nuestro robot.
   
 ## Instalación de módulos necesarios (usando Anaconda)
