@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+
+<robot name="robot">
+    
+    <!-- Linkages  -->
+    <link name="lk0">
+    	<visual>
+    	    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    	    <geometry>
+    	    	<mesh filename="lk_0.STL" scale="1.0 1.0 1.0" />
+    	    </geometry>
+    	    <material name="black">
+    	    	<color rgba="0.4 0.4 0.4 1.0"/>
+    	    </material>
+    	</visual>
+    	<inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1"/>
+            <inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+       </inertial>
+    </link>
+    
+    <link name="lk1">
+    	<visual>
+    	    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    	    <geometry>
+    	    	<mesh filename="lk_1.STL" scale="1.0 1.0 1.0" />
+    	    </geometry>
+    	    <material name="yellow">
+    	    	<color rgba="1.0 1.0 0.0 1.0"/>
+    	    </material>
+    	</visual>
+    	<inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1"/>
+            <inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+       </inertial>
+    </link>
+
+	<link name="lk2">
+    	<visual>
+    	    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    	    <geometry>
+    	    	<mesh filename="lk_2.STL" scale="1.0 1.0 1.0" />
+    	    </geometry>
+    	    <material name="yellow">
+    	    	<color rgba="1.0 1.0 0.0 1.0"/>
+    	    </material>
+    	</visual>
+    	<inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1"/>
+            <inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+       </inertial>
+    </link>
+
+	<link name="lk3">
+    	<visual>
+    	    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    	    <geometry>
+    	    	<mesh filename="lk_3.STL" scale="1.0 1.0 1.0" />
+    	    </geometry>
+    	    <material name="yellow">
+    	    	<color rgba="1.0 1.0 0.0 1.0"/>
+    	    </material>
+    	</visual>
+    	<inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1"/>
+            <inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+       </inertial>
+    </link>
+
+	<link name="lk4">
+    	<visual>
+    	    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    	    <geometry>
+    	    	<mesh filename="lk_4.STL" scale="1.0 1.0 1.0" />
+    	    </geometry>
+    	    <material name="yellow">
+    	    	<color rgba="1.0 1.0 0.0 1.0"/>
+    	    </material>
+    	</visual>
+    	<inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1"/>
+            <inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+       </inertial>
+    </link>
+
+	<link name="lk5">
+    	<visual>
+    	    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    	    <geometry>
+    	    	<mesh filename="lk_5.STL" scale="1.0 1.0 1.0" />
+    	    </geometry>
+    	    <material name="yellow">
+    	    	<color rgba="1.0 1.0 0.0 1.0"/>
+    	    </material>
+    	</visual>
+    	<inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1"/>
+            <inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+       </inertial>
+    </link>
+
+	<link name="lk6">
+    	<visual>
+    	    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    	    <geometry>
+    	    	<mesh filename="lk_6.STL" scale="1.0 1.0 1.0" />
+    	    </geometry>
+    	    <material name="yellow">
+    	    	<color rgba="1.0 1.0 0.0 1.0"/>
+    	    </material>
+    	</visual>
+    	<inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1"/>
+            <inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+       </inertial>
+    </link>
+    
+    <!-- Joints -->
+    <joint name="q1" type="revolute">
+    	<parent link="lk0"/>
+    	<child link="lk1"/>
+    	<axis xyz="0.0 0.0 1.0"/>
+    	<limit lower="-3.1416" upper="3.1416" effort="1.0" velocity="1.0"/>
+    	<origin xyz="0.0 0.0 0.110" rpy="0.0 0.0 0.0" />
+    </joint>
+
+	<joint name="q2" type="revolute">
+    	<parent link="lk1"/>
+    	<child link="lk2"/>
+    	<axis xyz="0.0 0.0 1.0"/>
+    	<limit lower="-3.1416" upper="3.1416" effort="1.0" velocity="1.0"/>
+    	<origin xyz="0.0 0.0 0.375" rpy="1.570796327 0.0 1.570796327" />
+    </joint>
+
+	<joint name="q3" type="revolute">
+    	<parent link="lk2"/>
+    	<child link="lk3"/>
+    	<axis xyz="0.0 0.0 1.0"/>
+    	<limit lower="-3.1416" upper="3.1416" effort="1.0" velocity="1.0"/>
+    	<origin xyz="1.0 0.0 0.0" rpy="0.0 0.0 1.570796327" />
+    </joint>
+
+	<joint name="q4" type="revolute">
+    	<parent link="lk3"/>
+    	<child link="lk4"/>
+    	<axis xyz="0.0 0.0 1.0"/>
+    	<limit lower="-3.1416" upper="3.1416" effort="1.0" velocity="1.0"/>
+    	<origin xyz="0.640 0.0 0.0" rpy="1.570796327 0.0 1.570796327"/>
+    </joint>
+
+	<joint name="q5" type="revolute">
+    	<parent link="lk4"/>
+    	<child link="lk5"/>
+    	<axis xyz="0.0 0.0 1.0"/>
+    	<limit lower="-3.1416" upper="3.1416" effort="1.0" velocity="1.0"/>
+    	<origin xyz="0.0 0.0 0.1" rpy="1.570796327 1.570796327 0.0"/>
+    </joint>
+
+	<joint name="q6" type="revolute">
+    	<parent link="lk5"/>
+    	<child link="lk6"/>
+    	<axis xyz="0.0 0.0 1.0"/>
+    	<limit lower="-3.1416" upper="3.1416" effort="1.0" velocity="1.0"/>
+    	<origin xyz="-0.15 0.0 0.0" rpy="-1.570796327 0.0 1.570796327"/>
+    </joint>
+	
+</robot>
