@@ -19,5 +19,5 @@ En la carpeta Agnes se contiene un fichero python "visualize_agnes.py" que al co
     conda install -c conda -forge pybullet
     
   #### ---Para correr el fichero "visualize_agnes.py"---
-    ***Estando en la ruta del archivo***
+    (Estando en la ruta del archivo)
     python visualize_agnes.py
