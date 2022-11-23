@@ -50,20 +50,20 @@ if __name__ == '__main__':
     pb.setAdditionalSearchPath(pybullet_data.getDataPath())
     ground = pb.loadURDF('plane.urdf')
     #table = pb.loadURDF('table/table.urdf') 
-    cube = pb.loadURDF('cube.urdf', basePosition = [1.75, 0.0, 0.25], globalScaling = 0.5)
+    cube = pb.loadURDF('cube.urdf', basePosition = [1.5, 0.0, 0.125], globalScaling = 0.25)
     agnes_urdf = pb.loadURDF('/URDF/agnes.urdf.xml', useFixedBase=1)
     
     # Instanciating an Agnes robot
     agnes = Agnes(agnes_urdf, 0.01, 0.485, 1.0, 0.74, 0.254374022)
     
     # Movement sequence
-    states = (((1.5, 0.25, 0.5),(-np.pi, -np.pi/4, -np.pi/4)),
-              ((1.5, -0.25, 0.5), (-np.pi, -np.pi/4, np.pi/4)))       
+    states = (((1.5, 0.125, 0.3),(-np.pi, -np.pi/4, -np.pi/4)),
+              ((1.75, -0.25, 0.3), (-np.pi, -np.pi/4, np.pi/4)))       
 
     for i, state in enumerate(states):
         q = agnes.solve(state[0], state[1],-1)
         print(f'------ q {type(q)}')
-        agnes.move(q, 10)
+        agnes.move(q, 5)
     
     # End program
     input('Press ENTER to stop...')
