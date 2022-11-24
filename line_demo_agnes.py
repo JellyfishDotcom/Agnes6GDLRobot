@@ -21,23 +21,12 @@ class Agnes(Ik_solver_agnes, Planner):
                                  targetPositions = self.joint_state,
                                  forces = [100, 100, 100, 100, 100, 100])
         self.joint_state = joint_state
-        
-    def move(self, target_joint_state, duration):
-        _, _, path = self.plan_j3(duration, 
-                                 self._dt, 
-                                 self.joint_state, 
-                                 target_joint_state,
-                                 len(self.joint_state)*[0],
-                                 len(self.joint_state)*[0],
-                                 len(self.joint_state)*[0],
-                                 len(self.joint_state)*[0])
-        
-        input('Press Enter to continue...')
-        for i in range(path.shape[0]):
-            self.set_joints(path[i])
-            time.sleep(self._dt)
-            pb.stepSimulation()
-            
+
+    def move(self, joint_target):
+        self.set_joints(joint_target)
+        time.sleep(self._dt)
+        pb.stepSimulation()
+    
 if __name__ == '__main__':
     # Make an instance of a physic client
     py_client = pb.connect(pb.GUI)
@@ -45,6 +34,7 @@ if __name__ == '__main__':
     # Simulation parameters
     pb.setGravity(0, 0, -9.81)
     pb.setRealTimeSimulation(0)
+    dt = 0.01
 
     # Objects
     pb.setAdditionalSearchPath(pybullet_data.getDataPath())
@@ -52,22 +42,9 @@ if __name__ == '__main__':
     #table = pb.loadURDF('table/table.urdf') 
     cube = pb.loadURDF('cube.urdf', basePosition = [1.5, 0.0, 0.125], globalScaling = 0.25)
     agnes_urdf = pb.loadURDF('/URDF/agnes.urdf.xml', useFixedBase=1)
-    
+
     # Instanciating an Agnes robot
     agnes = Agnes(agnes_urdf, 0.01, 0.485, 1.0, 0.74, 0.257564970)
-    
-    # Movement sequence
-    states = (((1.375, 0.2, 0.25),(-np.pi, -np.pi/4, -np.pi/4), 5),
-              ((1.625, 0.2, 0.25),(-np.pi, -np.pi/4, -np.pi/4), 5),
-              ((1.625, 0.2, 0.35),(-np.pi, -np.pi/4, -np.pi/4), 2.5),
-              ((1.625, -0.2, 0.35),(-np.pi, -np.pi/4, np.pi/4), 2.5),
-              ((1.675, -0.2, 0.25), (-np.pi, -np.pi/4, np.pi/4), 5),
-              ((1.375, -0.2, 0.25), (-np.pi, -np.pi/4, np.pi/4), 5))       
 
-    for i, state in enumerate(states):
-        q = agnes.solve(state[0], state[1],-1)
-        agnes.move(q, state[2])
+    # Trajectory
     
-    # End program
-    input('Press ENTER to stop...')
-    pb.disconnect()

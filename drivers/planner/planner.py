@@ -29,6 +29,22 @@ class Planner:
 
         return a, v, q
 
+    
+    def plan_line(self, tf, dt, q0, qf):
+        
+        # Auxiliar vector coefficients
+        v = qf - q0
+        
+        # Coordinates
+        a = np.linspace(q0[3], qf[3], dt)
+        x = np.linspace(q0[0], qf[0], dt)
+        t = (x - q0[0])/ v[0]
+        
+        y = q0[1] + v[1]*t
+        z = q0[2] + v[2]*t
+                        
+        return x, y, z, a
+
 if __name__ == '__main__':
     # Initial and final values
     q0 = np.array([0])
