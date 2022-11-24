@@ -55,7 +55,7 @@ if __name__ == '__main__':
         agnes.move(joint_state)
         
     # Trajectory
-    vx, vy, vz, ap, bp, cp = agnes.plan_line(5, dt, (1.5,0,1.22444, 0, 0, 0), (1.25,.25,1.22444, 0, 0, 45))
+    vx, vy, vz, ap, bp, cp = agnes.plan_line(5, dt,(1.5,0,1.22444, 0, 0, 0), (1.25,.25,1.22444, 0, 0, 45))
     
     input('Press ENTER to continue...')
     for x, y, z, a, b, c in zip(vx, vy, vz, ap, bp, cp):

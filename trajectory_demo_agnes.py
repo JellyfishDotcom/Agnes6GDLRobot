@@ -57,12 +57,12 @@ if __name__ == '__main__':
     agnes = Agnes(agnes_urdf, 0.01, 0.485, 1.0, 0.74, 0.257564970)
     
     # Movement sequence
-    states = (((1.375, 0.2, 0.25),(-np.pi, -np.pi/4, -np.pi/4), 5),
-              ((1.625, 0.2, 0.25),(-np.pi, -np.pi/4, -np.pi/4), 5),
-              ((1.625, 0.2, 0.35),(-np.pi, -np.pi/4, -np.pi/4), 2.5),
-              ((1.625, -0.2, 0.35),(-np.pi, -np.pi/4, np.pi/4), 2.5),
-              ((1.675, -0.2, 0.25), (-np.pi, -np.pi/4, np.pi/4), 2.5),
-              ((1.375, -0.2, 0.25), (-np.pi, -np.pi/4, np.pi/4), 5))       
+    states = (((1.375, 0.2, 0.25),(-np.pi, -np.pi/4, -np.pi/4), 4),
+              ((1.625, 0.2, 0.25),(-np.pi, -np.pi/4, -np.pi/4), 4),
+              ((1.625, 0.2, 0.35),(-np.pi, -np.pi/4, -np.pi/4), 1),
+              ((1.625, -0.2, 0.35),(-np.pi, -np.pi/4, np.pi/4), 2),
+              ((1.675, -0.2, 0.25), (-np.pi, -np.pi/4, np.pi/4), 1),
+              ((1.375, -0.2, 0.25), (-np.pi, -np.pi/4, np.pi/4), 4))       
 
     for i, state in enumerate(states):
         q = agnes.solve(state[0], state[1],-1)
