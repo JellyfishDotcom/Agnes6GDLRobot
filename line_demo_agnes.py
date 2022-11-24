@@ -38,8 +38,7 @@ if __name__ == '__main__':
 
     # Objects
     pb.setAdditionalSearchPath(pybullet_data.getDataPath())
-    ground = pb.loadURDF('plane.urdf')
-    #table = pb.loadURDF('table/table.urdf') 
+    ground = pb.loadURDF('plane.urdf') 
     cube = pb.loadURDF('cube.urdf', basePosition = [1.5, 0.0, 0.125], globalScaling = 0.25)
     agnes_urdf = pb.loadURDF('/URDF/agnes.urdf.xml', useFixedBase=1)
 
@@ -47,4 +46,24 @@ if __name__ == '__main__':
     agnes = Agnes(agnes_urdf, 0.01, 0.485, 1.0, 0.74, 0.257564970)
 
     # Trajectory
+    vx, vy, vz, ap, bp, cp = agnes.plan_line(5, dt, (1.225,0,1.22444, 0, 0, 0), (1.5,0,1.22444, 0, 0, 0))
+    
+    input('Press ENTER to continue...')
+    for x, y, z, a, b, c in zip(vx, vy, vz, ap, bp, cp):
+        joint_state = agnes.solve((x, y, z),(a, b, c), -1)
+        # print(f'joint_state {type(joint_state)}')
+        agnes.move(joint_state)
+        
+    # Trajectory
+    vx, vy, vz, ap, bp, cp = agnes.plan_line(5, dt, (1.5,0,1.22444, 0, 0, 0), (1.25,.25,1.22444, 0, 0, 45))
+    
+    input('Press ENTER to continue...')
+    for x, y, z, a, b, c in zip(vx, vy, vz, ap, bp, cp):
+        joint_state = agnes.solve((x, y, z),(a, b, c), -1)
+        # print(f'joint_state {type(joint_state)}')
+        agnes.move(joint_state)
+        
+    # End program
+    input('Press ENTER to stop..')
+    pb.disconnect()
     

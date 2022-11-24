@@ -30,20 +30,33 @@ class Planner:
         return a, v, q
 
     
-    def plan_line(self, tf, dt, q0, qf):
+    def plan_line(self, tf, dt, p0, pf):
+        dt = int(tf/dt)
+        
+        # Position and orientation
+        o0 = np.array(p0[:3])
+        of = np.array(pf[:3])
+        
+        a0 = np.array(np.deg2rad(p0[3:6]))
+        af = np.array(np.deg2rad(pf[3:6]))
         
         # Auxiliar vector coefficients
-        v = qf - q0
+        v = of - o0
         
-        # Coordinates
-        a = np.linspace(q0[3], qf[3], dt)
-        x = np.linspace(q0[0], qf[0], dt)
-        t = (x - q0[0])/ v[0]
+        # x-vector and time vector
+        x = np.linspace(p0[0], pf[0], dt)
+        t = (x - p0[0])/ v[0]
         
-        y = q0[1] + v[1]*t
-        z = q0[2] + v[2]*t
+        # y and z vectors
+        y = p0[1] + v[1]*t
+        z = p0[2] + v[2]*t
+        
+        # Wrist
+        a = np.linspace(p0[3], pf[3], dt)
+        b = np.linspace(p0[4], pf[4], dt)
+        c = np.linspace(p0[5], pf[5], dt)
                         
-        return x, y, z, a
+        return x, y, z, a, b, c
 
 if __name__ == '__main__':
     # Initial and final values
