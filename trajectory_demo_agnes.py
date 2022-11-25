@@ -15,6 +15,9 @@ class Agnes(Ik_solver_agnes, Planner):
         self.joint_state = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
         
     def set_joints(self, joint_state):
+        '''
+        - joint_state: Valores articulares deseados
+        '''
         pb.setJointMotorControlArray(self._robot,
                                  range(pb.getNumJoints(self._robot)),
                                  pb.POSITION_CONTROL,
@@ -23,7 +26,11 @@ class Agnes(Ik_solver_agnes, Planner):
         self.joint_state = joint_state
         
     def move(self, target_joint_state, duration):
-        _, _, path = self.plan_j3(duration, 
+        '''
+        - target_joint_state: Valores articulares que queremos alcanzar
+        - duration: Duración del movimiento
+        '''
+        _, _, path = self.plan_j5(duration, 
                                  self._dt, 
                                  self.joint_state, 
                                  target_joint_state,
@@ -56,17 +63,21 @@ if __name__ == '__main__':
     # Instanciating an Agnes robot
     agnes = Agnes(agnes_urdf, 0.01, 0.485, 1.0, 0.74, 0.257564970)
     
-    # Movement sequence
+     # Movement sequence
     states = (((1.375, 0.2, 0.25),(-np.pi, -np.pi/4, -np.pi/4), 4),
-              ((1.625, 0.2, 0.25),(-np.pi, -np.pi/4, -np.pi/4), 4),
-              ((1.625, 0.2, 0.35),(-np.pi, -np.pi/4, -np.pi/4), 1),
-              ((1.625, -0.2, 0.35),(-np.pi, -np.pi/4, np.pi/4), 2),
-              ((1.675, -0.2, 0.25), (-np.pi, -np.pi/4, np.pi/4), 1),
-              ((1.375, -0.2, 0.25), (-np.pi, -np.pi/4, np.pi/4), 4))       
-
-    for i, state in enumerate(states):
-        q = agnes.solve(state[0], state[1],-1)
-        agnes.move(q, state[2])
+                ((1.625, 0.2, 0.25),(-np.pi, -np.pi/4, -np.pi/4), 4),
+                ((1.625, 0.2, 0.35),(-np.pi, -np.pi/4, -np.pi/4), 1),
+                ((1.625, -0.2, 0.35),(-np.pi, -np.pi/4, np.pi/4), 2),
+                ((1.675, -0.2, 0.25), (-np.pi, -np.pi/4, np.pi/4), 1),
+                ((1.375, -0.2, 0.25), (-np.pi, -np.pi/4, np.pi/4), 4)) 
+    
+    rep = 1
+    while rep == 1:
+        for i, state in enumerate(states):
+            q = agnes.solve(state[0], state[1],-1)
+            agnes.move(q, state[2])
+        
+        rep = int(input('¿Repeat? (1)YES, (ANY OTHER NUMBER)NO: '))
     
     # End program
     input('Press ENTER to stop...')

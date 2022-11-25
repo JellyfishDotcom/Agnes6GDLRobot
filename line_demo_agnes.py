@@ -15,6 +15,10 @@ class Agnes(Ik_solver_agnes, Planner):
         self.joint_state = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
         
     def set_joints(self, joint_state):
+        '''
+        Método que mueve el robot hacia lo indicado en joint_state
+        - joint_state: Valores articulares que se quieren alcanzar
+        '''
         pb.setJointMotorControlArray(self._robot,
                                  range(pb.getNumJoints(self._robot)),
                                  pb.POSITION_CONTROL,
@@ -23,6 +27,10 @@ class Agnes(Ik_solver_agnes, Planner):
         self.joint_state = joint_state
 
     def move(self, joint_target):
+        '''
+        Método que mueve el robot hacia el punto indicado en joint_target
+        - joint_target: Valores articulares que se quieren alcanzar
+        '''
         self.set_joints(joint_target)
         time.sleep(self._dt)
         pb.stepSimulation()
@@ -46,7 +54,7 @@ if __name__ == '__main__':
     agnes = Agnes(agnes_urdf, 0.01, 0.485, 1.0, 0.74, 0.257564970)
 
     # Trajectory
-    vx, vy, vz, ap, bp, cp = agnes.plan_line(5, dt, (1.225,0,1.22444, 0, 0, 0), (1.5,0,1.22444, 0, 0, 0))
+    vx, vy, vz, ap, bp, cp = agnes.plan_line(5, dt, (1.225,0,1.25444, 0, 0, 0), (1.5,0,1.25444, 0, 0, 0))
     
     input('Press ENTER to continue...')
     for x, y, z, a, b, c in zip(vx, vy, vz, ap, bp, cp):
@@ -55,7 +63,16 @@ if __name__ == '__main__':
         agnes.move(joint_state)
         
     # Trajectory
-    vx, vy, vz, ap, bp, cp = agnes.plan_line(5, dt,(1.5,0,1.22444, 0, 0, 0), (1.25,.25,1.22444, 0, 0, 45))
+    vx, vy, vz, ap, bp, cp = agnes.plan_line(5, dt,(1.5,0,1.25444, 0, 0, 0), (1.225,.25,1.25444, 0, 0, 0))
+    
+    input('Press ENTER to continue...')
+    for x, y, z, a, b, c in zip(vx, vy, vz, ap, bp, cp):
+        joint_state = agnes.solve((x, y, z),(a, b, c), -1)
+        # print(f'joint_state {type(joint_state)}')
+        agnes.move(joint_state)
+
+    # Trajectory
+    vx, vy, vz, ap, bp, cp = agnes.plan_line(5, dt,(1.225,.25,1.25444, 0, 0, 0), (1.5,0,1.25444, 0, 0, 0))
     
     input('Press ENTER to continue...')
     for x, y, z, a, b, c in zip(vx, vy, vz, ap, bp, cp):
@@ -63,6 +80,16 @@ if __name__ == '__main__':
         # print(f'joint_state {type(joint_state)}')
         agnes.move(joint_state)
         
+    # Trajectory
+    vx, vy, vz, ap, bp, cp = agnes.plan_line(5, dt,(1.5,0,1.22444, 0, 0, 0), (1.225,0,1, 0, 0, 0))
+    
+    input('Press ENTER to continue...')
+    for x, y, z, a, b, c in zip(vx, vy, vz, ap, bp, cp):
+        joint_state = agnes.solve((x, y, z),(a, b, c), -1)
+        # print(f'joint_state {type(joint_state)}')
+        agnes.move(joint_state)
+
+
     # End program
     input('Press ENTER to stop..')
     pb.disconnect()

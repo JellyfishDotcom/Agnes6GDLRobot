@@ -3,7 +3,18 @@ class Planner:
     def __init__(self):
         pass
     
-    def plan_j3(self, tf, dt, q0, qf, v0, vf, a0, af):
+    def plan_j5(self, tf, dt, q0, qf, v0, vf, a0, af):
+        '''
+        Función que usa un polinomio de quinto grado para generar movimientos suaves y naturales
+        - tf: Tiempo para realizar el movimiento
+        - dt: Paso del vector de tiempo
+        - q0: Posición inicial
+        - qf: Posición final
+        - v0: Velocidad inicial
+        - vf: Velocidad final
+        - a0: Aceleración inicial
+        - af: Aceleración final
+        '''
         q0 = np.array(q0)
         qf = np.array(qf)
         v0 = np.array(v0)
@@ -31,6 +42,13 @@ class Planner:
 
     
     def plan_line(self, tf, dt, p0, pf):
+        '''
+        Función que devuelve vectores de posiciones necesarias para formar una línea recta entre dos diferentes poses
+        - tf: Tiempo para el movimiento
+        - dt: Paso para el vector de tiempo
+        - p0: Pose inicial
+        - pf: Pose final
+        '''
         dt = int(tf/dt)
         # Position and orientation
         o0 = np.array(p0[:3])
@@ -64,7 +82,7 @@ if __name__ == '__main__':
     dt = 0.01
 
     planner = Planner()
-    a, v, q = planner.plan_j3(tf, 0.01, q0, qf, v0, vf, a0, af)
+    a, v, q = planner.plan_j5(tf, 0.01, q0, qf, v0, vf, a0, af)
     t = np.arange(0,tf+dt,dt)
 
     # plotting
